@@ -9,3 +9,13 @@
 - Create BrowserRouter > Routes > Route => /Body > ChildRoutes
 - Create an outlet in your Body Component
 - Create a Footer Component
+
+- INSTALL Axios and handle the login
+- Fix CORS issue from BE and FE with configuration
+- Set token in browser Cookies
+- INSTALL react-redux + @reduxjs/toolkit
+- configureStore > provider > createSlice > add reducer to store
+- Save login data to store
+- Update Navbar with user profile photo and navigate to feed page
+- Folder structure + constant file
+- Implemented logout and navigate to login
