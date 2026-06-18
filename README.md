@@ -21,3 +21,5 @@
 - Implemented logout and navigate to login
 
 - Retaining user data on reload if user is logged in or else redirect to /login
+- Adding feed Api call in profile component
+- Adding feedSlice to save feed data to Store

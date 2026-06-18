@@ -22,7 +22,6 @@ const Login = () => {
         },
         { withCredentials: true },
       );
-      console.log(res.data);
       dispatch(addUser(res.data.data));
       navigate("/");
       // axios response objects already have parsed JSON
