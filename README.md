@@ -19,3 +19,5 @@
 - Update Navbar with user profile photo and navigate to feed page
 - Folder structure + constant file
 - Implemented logout and navigate to login
+
+- Retaining user data on reload if user is logged in or else redirect to /login

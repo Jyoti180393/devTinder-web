@@ -43,6 +43,7 @@ const Login = () => {
               <input
                 type="text"
                 className="input input-bordered w-full max-w-xs"
+                value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
@@ -55,6 +56,7 @@ const Login = () => {
               <input
                 type="text"
                 className="input input-bordered w-full max-w-xs"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
