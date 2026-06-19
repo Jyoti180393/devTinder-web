@@ -1,10 +1,10 @@
-const User = ({ user }) => {
+const UserCard = ({ user }) => {
   console.log(user);
   const { firstName, age, photoUrl, about, skills } = user;
   return (
     <div className="shadow-sm max-w-lg rounded-2xl">
       <div id="slide1" className="carousel-item relative w-full group">
-        <div className="relative w-100 overflow-hidden rounded-2xl">
+        <div className="relative w-full overflow-hidden rounded-2xl">
           <img src={photoUrl} alt={firstName + "'s photo"} className="w-full" />
           <div className="absolute bottom-0 left-0 w-full p-4 text-white z-10 bg-black/50">
             <div className="flex gap-2 text-2xl font-medium mb-1">
@@ -43,7 +43,7 @@ const User = ({ user }) => {
   );
 };
 
-export default User;
+export default UserCard;
 
 {
   /* <div className="card bg-base-100 w-96 shadow-sm">
