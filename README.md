@@ -27,3 +27,5 @@
 
 - Added Profile edit functionality and toast message on saving and errors on validation faliure
 - Fixed UI issue related to reusable UserCard
+
+- Added connections page to see all the connection of loggedIn user
