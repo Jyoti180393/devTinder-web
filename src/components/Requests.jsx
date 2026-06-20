@@ -2,7 +2,7 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constant";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequests } from "../store/requestsSlice";
+import { addRequests, removeRequest } from "../store/requestsSlice";
 
 const Requests = () => {
   const dispatch = useDispatch();
@@ -13,10 +13,23 @@ const Requests = () => {
       const res = await axios.get(BASE_URL + "/user/request/recieved", {
         withCredentials: true,
       });
-      console.log(res);
       dispatch(addRequests(res.data.data));
     } catch (err) {
       console.log(err.response);
+    }
+  };
+
+  const reviewRequest = async (status, reqId) => {
+    try {
+      console.log(BASE_URL + "/request/review/" + status + "/" + reqId);
+      await axios.post(
+        BASE_URL + "/request/review/" + status + "/" + reqId,
+        {},
+        { withCredentials: true },
+      );
+      dispatch(removeRequest(reqId));
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -71,10 +84,16 @@ const Requests = () => {
                   </div> */}
                   </div>
                   <div className="flex flex-col gap-2">
-                    <button className="btn btn-secondary rounded-3xl hover:scale-110">
+                    <button
+                      className="btn btn-soft btn-primary rounded-3xl hover:scale-110 text-lg"
+                      onClick={() => reviewRequest("accepted", request._id)}
+                    >
                       Accept
                     </button>
-                    <button className="btn btn-primary-content bg-white text-black rounded-3xl hover:scale-110">
+                    <button
+                      className="btn btn-soft btn-secondary rounded-3xl hover:scale-110 text-lg"
+                      onClick={() => reviewRequest("rejected", request._id)}
+                    >
                       Reject
                     </button>
                   </div>

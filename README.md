@@ -30,3 +30,9 @@
 
 - Added connections page to see all the connection of loggedIn user
 - Added requests page to see all the connection requests of loggedIn user
+- Added Accept and Reject connection request feature
+
+// ToDo
+
+- make an central error handler for all the API errors
+- make loading feature or skeleton UI
