@@ -29,3 +29,4 @@
 - Fixed UI issue related to reusable UserCard
 
 - Added connections page to see all the connection of loggedIn user
+- Added requests page to see all the connection requests of loggedIn user
