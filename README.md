@@ -22,4 +22,8 @@
 
 - Retaining user data on reload if user is logged in or else redirect to /login
 - Adding feed Api call in profile component
-- Adding feedSlice to save feed data to Store
+- Added feedSlice to save feed data to Store
+- Added logout feature
+
+- Added Profile edit functionality and toast message on saving and errors on validation faliure
+- Fixed UI issue related to reusable UserCard

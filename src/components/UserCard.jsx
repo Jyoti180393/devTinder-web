@@ -1,11 +1,21 @@
-const UserCard = ({ user }) => {
-  console.log(user);
+const UserCard = ({ isFeed, user }) => {
   const { firstName, age, photoUrl, about, skills } = user;
+
   return (
     <div className="shadow-sm max-w-lg rounded-2xl">
       <div id="slide1" className="carousel-item relative w-full group">
-        <div className="relative w-full overflow-hidden rounded-2xl">
-          <img src={photoUrl} alt={firstName + "'s photo"} className="w-full" />
+        <div
+          className={
+            isFeed
+              ? "w-100 relative overflow-hidden rounded-2xl"
+              : "w-full h-64 sm:h-80 md:h-120 relative overflow-hidden rounded-2xl"
+          }
+        >
+          <img
+            src={photoUrl}
+            alt={firstName + "'s photo"}
+            className="w-full h-full object-cover"
+          />
           <div className="absolute bottom-0 left-0 w-full p-4 text-white z-10 bg-black/50">
             <div className="flex gap-2 text-2xl font-medium mb-1">
               <span>{firstName}</span>
