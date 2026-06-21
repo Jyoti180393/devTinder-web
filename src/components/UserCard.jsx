@@ -26,7 +26,7 @@ const UserCard = ({ isFeed, user }) => {
       <div id="slide1" className="carousel-item relative w-full group">
         <div
           className={`relative overflow-hidden rounded-2xl 
-            ${isFeed ? "w-100 " : "w-full h-64 sm:h-80 md:h-120"}`}
+            ${isFeed ? "w-100" : "w-full h-64 sm:h-80 md:h-120"}`}
         >
           <img
             src={photoUrl}

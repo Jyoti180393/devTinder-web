@@ -33,6 +33,8 @@
 - Added Accept and Reject connection request feature
 - Added Send/Ignore connection request feature in user card
 
+- Added signup form with a reusable dropdown component
+
 // ToDo
 
 - make an central error handler for all the API errors
