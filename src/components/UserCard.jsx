@@ -1,20 +1,39 @@
+import axios from "axios";
+import { BASE_URL } from "../utils/constant";
+import { useDispatch } from "react-redux";
+import { removeFeed } from "../store/feedSlice";
+
 const UserCard = ({ isFeed, user }) => {
-  const { firstName, age, photoUrl, about, skills } = user;
+  const { _id, firstName, age, photoUrl, about, skills } = user;
+  const dispatch = useDispatch();
+
+  const handleSendrequest = async (status, userId) => {
+    try {
+      await axios.post(
+        BASE_URL + "/request/send/" + status + "/" + userId,
+        {},
+        { withCredentials: true },
+      );
+
+      dispatch(removeFeed());
+    } catch (err) {
+      console.error(err.response.data);
+    }
+  };
 
   return (
     <div className="shadow-sm max-w-lg rounded-2xl">
       <div id="slide1" className="carousel-item relative w-full group">
         <div
-          className={
-            isFeed
-              ? "w-100 relative overflow-hidden rounded-2xl"
-              : "w-full h-64 sm:h-80 md:h-120 relative overflow-hidden rounded-2xl"
-          }
+          className={`relative overflow-hidden rounded-2xl 
+            ${isFeed ? "w-100 " : "w-full h-64 sm:h-80 md:h-120"}`}
         >
           <img
             src={photoUrl}
             alt={firstName + "'s photo"}
-            className="w-full h-full object-cover"
+            className={`w-full object-cover ${
+              isFeed ? "h-[calc(100vh-15rem)]" : "h-[calc(100vh-25rem)]"
+            }`}
           />
           <div className="absolute bottom-0 left-0 w-full p-4 text-white z-10 bg-black/50">
             <div className="flex gap-2 text-2xl font-medium mb-1">
@@ -40,36 +59,47 @@ const UserCard = ({ isFeed, user }) => {
           </div>
         </div>
 
-        <div className="absolute left-2 right-2 top-1/2 transform justify-between hidden group-hover:flex">
-          <button href="#slide4" className="btn btn-circle">
-            ❮
-          </button>
-          <button href="#slide2" className="btn btn-circle">
-            ❯
-          </button>
-        </div>
+        {isFeed && (
+          <div className="absolute left-2 right-2 top-1/2 transform justify-between hidden group-hover:flex">
+            <div className="relative group inline-block">
+              <button
+                className="btn btn-circle w-12 h-12 text-xl hover:base-300"
+                onClick={() => handleSendrequest("interested", _id)}
+              >
+                ❮
+              </button>
+              <span
+                className="absolute top-full left-1/2  rounded-2xl
+            -translate-x-1/3 mt-2 px-3 py-1 bg-gray-800
+             text-md font-medium  
+             opacity-0 pointer-events-none transition-opacity
+              duration-200 group-hover:opacity-100 "
+              >
+                Select
+              </span>
+            </div>
+            <div className="relative group inline-block">
+              <button
+                className="btn btn-circle w-12 h-12 text-xl hover:base-300"
+                onClick={() => handleSendrequest("ignored", _id)}
+              >
+                ❯
+              </button>
+              <span
+                className="absolute top-full left-2 rounded-2xl
+            -translate-x-1/3 mt-2 px-3 py-1 bg-gray-800
+             text-md font-medium  
+             opacity-0 pointer-events-none transition-opacity
+              duration-200 group-hover:opacity-100 "
+              >
+                Ignore
+              </span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default UserCard;
-
-{
-  /* <div className="card bg-base-100 w-96 shadow-sm">
-      <figure>
-        <img src={photoUrl} alt="Shoes" />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">Card Title</h2>
-        <p>
-          A card component has a figure, a body part, and inside body there are
-          title and actions parts
-        </p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
-        </div>
-      </div>
-    </div>
-    */
-}
