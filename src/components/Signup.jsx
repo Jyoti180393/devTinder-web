@@ -127,42 +127,6 @@ const Signup = () => {
             dropdownList={allowedGenders}
             onDropdownSelect={(selectedValue) => setGender(selectedValue)}
           />
-          {/* <div
-            className={`dropdown dropdown-bottom block ${genderDropdownOpen ? "dropdown-open" : "dropdown-close"}`}
-          >
-            <button
-              tabIndex={0}
-              role="button"
-              className="input text-md w-full max-w-xl h-10 text-lg"
-              onClick={() => {
-                setGenderDropdownOpen(true);
-              }}
-            >
-              {gender || "Select"}
-            </button>
-            {genderDropdownOpen && (
-              <ul
-                tabIndex="-1"
-                className="dropdown-content menu bg-base-100 rounded-box 
-              z-1 p-2 shadow-sm w-full"
-              >
-                {allowedGenders.map((genderOption, index) => (
-                  <li key={index} className="w-full my-1">
-                    <button
-                      className=" text-lg"
-                      onClick={() => {
-                        setGender(genderOption);
-                        console.log(genderOption);
-                        setGenderDropdownOpen(false);
-                      }}
-                    >
-                      {genderOption}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div> */}
         </label>
         <label className="form-control w-full max-w-xl block my-5">
           <div className="label font-bold text-md mb-1">

@@ -58,8 +58,8 @@ const Requests = () => {
             const { _id, firstName, lastName, photoUrl, age, gender, about } =
               request.fromUserId;
             return (
-              <div key={_id} className="w-1/3 felx bg-base-200 my-3">
-                <div className="card card-side shadow-sm p-3 items-center">
+              <div key={_id} className="min-w-1/3 felx bg-base-200 my-3">
+                <div className="card card-side shadow-sm items-center gap-2">
                   <figure>
                     <img
                       className="w-25 h-25 rounded-full"
@@ -76,14 +76,18 @@ const Requests = () => {
                       {gender && <span className="mx-1">{gender}</span>}
                     </p>
 
-                    <p>{about}</p>
-                    {/* <div className="card-actions justify-end">
-                    <button className="btn btn-primary-content bg-white text-black text-sm rounded-3xl mx-2">
-                      Message
-                    </button>
-                  </div> */}
+                    <div class="group relative cursor-pointer">
+                      <p className="truncate md:w-96">{about}</p>
+                      <span
+                        class="absolute left-30 bottom-full mt-2 hidden group-hover:block z-50 
+                        w-80 p-2 bg-base-100 border border-gray-800 text-sm rounded-md 
+                        shadow-xl wrap-break-word line-height-relaxed"
+                      >
+                        {about}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 m-1">
                     <button
                       className="btn btn-soft btn-primary rounded-3xl hover:scale-110 text-lg"
                       onClick={() => reviewRequest("accepted", request._id)}

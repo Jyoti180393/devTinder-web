@@ -4,6 +4,7 @@ import { BASE_URL } from "../utils/constant";
 import UserCard from "./UserCard";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/userSlice";
+import ReusableDropdown from "./ReusableDropdown";
 
 const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
@@ -18,6 +19,7 @@ const EditProfile = ({ user }) => {
   const [showPreview, setShowPreview] = useState(false);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const dispatch = useDispatch();
+  const allowedGenders = ["Male", "Female", "Others"];
 
   const handleSaveProfile = async () => {
     setError("");
@@ -33,7 +35,6 @@ const EditProfile = ({ user }) => {
       const res = await axios.patch(BASE_URL + "/profile/edit", payload, {
         withCredentials: true,
       });
-      console.log(res?.data?.data);
       setShowPreview(false);
       dispatch(addUser(res.data.data));
 
@@ -113,16 +114,15 @@ const EditProfile = ({ user }) => {
                     onChange={(e) => setAge(e.target.value)}
                   />
                 </label>
-                <label className="form-control w-full max-w-xl block my-3">
-                  {/* TODO: make it dropdown */}
-                  <div className="label font-bold text-md">
+                <label className="form-control w-full max-w-xl block my-5">
+                  <div className="label font-bold text-md mb-1">
                     <span className="label-text">GENDER</span>
                   </div>
-                  <input
-                    type="text"
-                    className="input input-bordered w-full max-w-xl h-10 text-lg"
-                    value={gender}
-                    onChange={(e) => setGender(e.target.value)}
+                  <ReusableDropdown
+                    dropdownList={allowedGenders}
+                    onDropdownSelect={(selectedValue) =>
+                      setGender(selectedValue)
+                    }
                   />
                 </label>
                 <label className="form-control w-full max-w-xl block my-3">

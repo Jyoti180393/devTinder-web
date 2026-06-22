@@ -37,8 +37,11 @@
 - Integrated /signup API and navigating to profile page
 
 - Clear all store on logout
-
-// ToDo
+- Added Gender dropdown in Profile edit page
+- Adding ellipse and hover in about section of Request
+  // ToDo
 
 - make an central error handler for all the API errors
 - make loading feature or skeleton UI
+- Add skills in signup and profile page to save in DB
+- make common component for request and connection
