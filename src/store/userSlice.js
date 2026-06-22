@@ -10,8 +10,11 @@ const userSlice = createSlice({
     removeUser: () => {
       return null;
     },
+    resetUser: () => {
+      return null;
+    },
   },
 });
 
 export default userSlice.reducer;
-export const { addUser, removeUser } = userSlice.actions;
+export const { addUser, removeUser, resetUser } = userSlice.actions;

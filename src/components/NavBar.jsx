@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { removeUser } from "../store/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../utils/constant";
+import { resetStore } from "../store/app.store";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
@@ -18,7 +18,7 @@ const NavBar = () => {
           withCredentials: true,
         },
       );
-      dispatch(removeUser());
+      dispatch(resetStore());
       navigate("/login");
     } catch (err) {
       console.log(err);

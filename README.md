@@ -36,8 +36,9 @@
 - Added signup form with a reusable dropdown component
 - Integrated /signup API and navigating to profile page
 
+- Clear all store on logout
+
 // ToDo
 
 - make an central error handler for all the API errors
 - make loading feature or skeleton UI
-- Clear all store on logout
