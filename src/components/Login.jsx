@@ -75,8 +75,8 @@ const Login = () => {
                 </label>
               </div>
               {error && (
-                <p className="text-red-500 leading-1.5 text-lg my-2">
-                  Error: {error}
+                <p className="text-red-500 leading-6 text-lg mt-4 mb-2">
+                  {error}
                 </p>
               )}
               <div className="card-actions justify-center m-2">

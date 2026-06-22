@@ -1,5 +1,10 @@
 import { useState } from "react";
 import ReusableDropdown from "./ReusableDropdown";
+import axios from "axios";
+import { BASE_URL } from "../utils/constant";
+import { useDispatch } from "react-redux";
+import { addUser } from "../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -12,7 +17,10 @@ const Signup = () => {
   const [securityQuestion, setSecurityQuestion] = useState("");
   const [securityAnswer, setSecurityAnswer] = useState("");
 
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const allowedGenders = ["Male", "Female", "Others"];
   const allowedSecurityQuestions = [
@@ -34,7 +42,15 @@ const Signup = () => {
         securityQuestion,
         securityAnswer,
       };
-      console.log(userData);
+      const res = await axios.post(BASE_URL + "/signup", userData, {
+        withCredentials: true,
+      });
+      dispatch(addUser(res.data.data));
+      setShowSuccessToast(true);
+      setTimeout(() => {
+        setShowSuccessToast(false);
+      }, 3000);
+      navigate("/profile");
     } catch (err) {
       console.error(err.response.data);
       setError(err.response.data);
@@ -43,7 +59,14 @@ const Signup = () => {
 
   return (
     <>
-      <div className="my-1 scrollbar-none overflow-auto h-100">
+      {showSuccessToast && (
+        <div className="toast toast-top toast-center">
+          <div className="alert alert-success">
+            <span>Your profile is saved successfully</span>
+          </div>
+        </div>
+      )}
+      <div className="my-1 scrollbar-none overflow-auto h-115">
         <label className="form-control w-full max-w-xl block my-5">
           <div className="label font-bold text-md mb-1">
             <span className="label-text">FIRST NAME</span>
@@ -96,7 +119,7 @@ const Signup = () => {
             onChange={(e) => setAge(e.target.value)}
           />
         </label>
-        <label className="form-control w-full max-w-xl block my-3">
+        <label className="form-control w-full max-w-xl block my-5">
           <div className="label font-bold text-md mb-1">
             <span className="label-text">GENDER</span>
           </div>
@@ -141,7 +164,7 @@ const Signup = () => {
             )}
           </div> */}
         </label>
-        <label className="form-control w-full max-w-xl block my-3">
+        <label className="form-control w-full max-w-xl block my-5">
           <div className="label font-bold text-md mb-1">
             <span className="label-text">ABOUT</span>
           </div>
@@ -151,7 +174,7 @@ const Signup = () => {
             onChange={(e) => setAbout(e.target.value)}
           ></textarea>
         </label>
-        <label className="form-control w-full max-w-xl block my-3">
+        <label className="form-control w-full max-w-xl block my-5">
           <div className="label font-bold text-md mb-1">
             <span className="label-text">SECURITY QUESTION</span>
           </div>
@@ -174,9 +197,12 @@ const Signup = () => {
         </label>
       </div>
       {error && (
-        <p className="text-red-500 leading-1.5 text-lg my-2">Error: {error}</p>
+        <p className="text-red-500 leading-6 text-lg mt-1 mb-1">
+          {error ||
+            "There is something wrong! Please reload then page and try again"}
+        </p>
       )}
-      <div className="card-actions justify-center m-2">
+      <div className="card-actions justify-center m-1">
         <button className="btn btn-primary text-xl" onClick={handleSignUp}>
           Signup
         </button>

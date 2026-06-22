@@ -34,6 +34,7 @@
 - Added Send/Ignore connection request feature in user card
 
 - Added signup form with a reusable dropdown component
+- Integrated /signup API and navigating to profile page
 
 // ToDo
 
