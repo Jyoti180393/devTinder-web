@@ -76,10 +76,10 @@ const Requests = () => {
                       {gender && <span className="mx-1">{gender}</span>}
                     </p>
 
-                    <div class="group relative cursor-pointer">
+                    <div className="group relative cursor-pointer">
                       <p className="truncate md:w-96">{about}</p>
                       <span
-                        class="absolute left-30 bottom-full mt-2 hidden group-hover:block z-50 
+                        className="absolute left-30 bottom-full mt-2 hidden group-hover:block z-50 
                         w-80 p-2 bg-base-100 border border-gray-800 text-sm rounded-md 
                         shadow-xl wrap-break-word line-height-relaxed"
                       >

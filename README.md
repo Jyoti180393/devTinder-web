@@ -39,9 +39,11 @@
 - Clear all store on logout
 - Added Gender dropdown in Profile edit page
 - Adding ellipse and hover in about section of Request
-  // ToDo
+
+- Changed title and favicon and fixed some cconsole error
 
 - make an central error handler for all the API errors
 - make loading feature or skeleton UI
 - Add skills in signup and profile page to save in DB
 - make common component for request and connection
+- add pagination to get users data in the profile page
