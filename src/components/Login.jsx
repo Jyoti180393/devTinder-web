@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 import Signup from "./Signup";
 
 const Login = () => {
-  const [email, setEmail] = useState("Jyoti@gmail.com");
-  const [password, setPassword] = useState("Pokharia@123");
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const [error, setError] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const dispatch = useDispatch();
@@ -56,7 +56,6 @@ const Login = () => {
                   <input
                     type="text"
                     className="input input-bordered w-full max-w-xl h-10 text-xl"
-                    value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
                     }}
@@ -69,7 +68,6 @@ const Login = () => {
                   <input
                     type="text"
                     className="input input-bordered w-full max-w-xl h-10 text-xl"
-                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </label>
