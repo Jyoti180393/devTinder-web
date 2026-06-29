@@ -40,7 +40,10 @@
 - Added Gender dropdown in Profile edit page
 - Adding ellipse and hover in about section of Request
 
-- Changed title and favicon and fixed some cconsole error
+- Changed title and favicon and fixed some console error
+- Handling the 0 feed length case
+
+ <!-- TODO -->
 
 - make an central error handler for all the API errors
 - make loading feature or skeleton UI

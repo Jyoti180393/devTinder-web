@@ -25,6 +25,18 @@ const Feed = () => {
     getFeed();
   }, []);
 
+  if (!feed) return;
+
+  if (feed.length === 0)
+    return (
+      <div className="flex flex-col justify-center my-30">
+        <h1 className="text-center text-3xl my-2">
+          Your have explored all the connections!
+        </h1>
+        <p className="text-center">Wait for the response from the requests</p>
+      </div>
+    );
+
   return (
     feed && (
       <div className="flex items-center justify-center min-h-[calc(100vh-7rem)] bg-base-300">
