@@ -31,6 +31,7 @@ const Login = () => {
         { withCredentials: true },
       );
       dispatch(addUser(res.data.data));
+      localStorage.setItem("isLoggedIn", "true");
       navigate("/");
       // axios response objects already have parsed JSON
     } catch (err) {

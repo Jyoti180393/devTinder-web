@@ -2,7 +2,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import axios from "axios";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { BASE_URL } from "../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../store/userSlice";
@@ -15,41 +15,49 @@ const Body = () => {
   const isNotLoginPage =
     location.pathname.includes("privacy-policy") ||
     location.pathname.includes("contactUs");
+  const isLoginPage = location.pathname.startsWith("/login");
+  const isLoggedIn = Boolean(localStorage.getItem("isLoggedIn"));
 
-  // TODO : make this an hook and call it after login only
-  const fetchUser = async () => {
+  // using useCallback to avoid infinite loop in useEffect
+  // since fetchUser is a dependency of useEffect, and useEffect runs when fetchUser changes
+  // since fetchUser is defined inside the component, it changes on every render
+  // we are making fetchUser a stable function by wrapping it in useCallback
+  // untill any dependency of useCallback changes,
+  // fetchUser will not change, and useEffect will not run again
+  const fetchUser = useCallback(async () => {
     try {
       const res = await axios.get(BASE_URL + "/profile/view", {
         withCredentials: true,
       });
       dispatch(addUser(res.data.data));
     } catch (err) {
-      if (err.status === 401) {
+      if (err?.response?.status === 401) {
         navigate("/login");
       }
-
-      console.log(err.response.data || err);
+      console.log(err.response?.data || err);
       // TODO: make an error page and add an option to login
     }
-  };
+  }, [dispatch, navigate]);
 
   useEffect(() => {
-    if (!userData && !isNotLoginPage) {
-      fetchUser();
+    if (isNotLoginPage || isLoginPage) return;
+
+    if (userData) return;
+
+    if (!isLoggedIn) {
+      navigate("/login");
+      return;
     }
-  }, []);
+
+    fetchUser();
+  }, [isNotLoginPage, isLoginPage, userData, isLoggedIn, navigate, fetchUser]);
 
   return (
-    // <div className="flex flex-col min-h-screen">
     <>
       <NavBar />
-      {/* <div className="flex-1 items-center justify-center w-full h-full"> */}
       <Outlet />
-      {/* </div> */}
       <Footer />
     </>
-
-    // </div>
   );
 };
 

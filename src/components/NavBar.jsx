@@ -18,6 +18,8 @@ const NavBar = () => {
           withCredentials: true,
         },
       );
+      localStorage.removeItem("user");
+      localStorage.removeItem("isLoggedIn");
       dispatch(resetStore());
       navigate("/login");
     } catch (err) {

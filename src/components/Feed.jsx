@@ -10,6 +10,7 @@ const Feed = () => {
   const feed = useSelector((store) => store.feed);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLoggedIn = Boolean(localStorage.getItem("isLoggedIn"));
 
   const getFeed = async () => {
     try {
@@ -26,9 +27,14 @@ const Feed = () => {
   };
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+      return;
+    }
+
     if (feed) return;
     getFeed();
-  }, []);
+  }, [feed, isLoggedIn, navigate]);
 
   if (!feed) return;
 

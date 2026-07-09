@@ -46,6 +46,7 @@ const Signup = () => {
         withCredentials: true,
       });
       dispatch(addUser(res.data.data));
+      localStorage.setItem("isLoggedIn", "true");
       setShowSuccessToast(true);
       setTimeout(() => {
         setShowSuccessToast(false);
