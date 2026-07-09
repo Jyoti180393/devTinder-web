@@ -36,6 +36,7 @@ const Login = () => {
     } catch (err) {
       setError(err?.response?.data || "Something went wrong");
       console.error("ERROR: ", err.response.data);
+      // TODO: need to redirect to error page
     }
   };
 

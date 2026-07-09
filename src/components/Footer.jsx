@@ -1,9 +1,26 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
-    <footer className="footer sm:footer-horizontal bg-base-100 text-neutral-content items-center p-4 fixed bottom-0">
+    <footer
+      className="footer sm:footer-horizontal bg-base-100 text-neutral-content items-center p-4 fixed bottom-0 
+    font-bold text-md"
+    >
       <aside className="grid-flow-col items-center">
-        <p>Copyright © 2026 - All right reserved</p>
+        <p>© 2026 - Dev-Tinder.com</p>
       </aside>
+      <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-start">
+        <Link to="/privacy-policy" target="_blank" className="link link-hover">
+          Privacy Policy
+        </Link>
+        <Link to="/contactUs" target="_blank" className="link link-hover">
+          Contact
+        </Link>
+        <Link to="/aboutUs" className="link link-hover">
+          About
+        </Link>
+      </nav>
+
       <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
         <a>
           <svg

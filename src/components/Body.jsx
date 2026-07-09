@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import axios from "axios";
@@ -8,10 +8,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../store/userSlice";
 
 const Body = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((store) => store.user);
+  const isNotLoginPage =
+    location.pathname.includes("privacy-policy") ||
+    location.pathname.includes("contactUs");
 
+  // TODO : make this an hook and call it after login only
   const fetchUser = async () => {
     try {
       const res = await axios.get(BASE_URL + "/profile/view", {
@@ -22,14 +27,17 @@ const Body = () => {
       if (err.status === 401) {
         navigate("/login");
       }
+
       console.log(err.response.data || err);
       // TODO: make an error page and add an option to login
     }
   };
 
   useEffect(() => {
-    if (!userData) {
+    if (!userData && !isNotLoginPage) {
       fetchUser();
+
+      // navigate("/login");
     }
   }, []);
 
