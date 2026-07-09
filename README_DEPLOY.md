@@ -13,8 +13,7 @@
 - sudo apt install nginx
 - sudo systemctl start nginx
 - sudo systemctl enable nginx
-- Copy code from devtinder/dist file to /var/www/html/
-- sudo scp -r dist/\* /var/www/html/
+- Copy code from devtinder/dist file to /var/www/html/ ---> sudo scp -r dist/\* /var/www/html/
 - Enable port :80 from AWS instance -> security -> security group
 - Update the base url to "/api"
 
