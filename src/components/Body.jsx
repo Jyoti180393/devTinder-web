@@ -36,8 +36,6 @@ const Body = () => {
   useEffect(() => {
     if (!userData && !isNotLoginPage) {
       fetchUser();
-
-      // navigate("/login");
     }
   }, []);
 
