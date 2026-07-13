@@ -28,8 +28,8 @@ const NavBar = () => {
   };
 
   return (
-    <div>
-      <div className="navbar bg-base-100 shadow-sm sticky">
+    <div className="sticky top-0 z-50 w-full">
+      <div className="navbar bg-base-100 shadow-sm">
         <div className="flex-1">
           {/* need to add a logo */}
           <Link to="/" className="btn btn-ghost text-xl">
