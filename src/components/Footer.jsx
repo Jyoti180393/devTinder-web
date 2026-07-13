@@ -10,7 +10,7 @@ const Footer = () => {
         <p>© 2026 - Dev-Tinder.com</p>
       </aside>
       <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-start">
-        <Link to="/privacy-policy" target="_blank" className="link link-hover">
+        <Link to="/privacy-policy" className="link link-hover">
           Privacy Policy
         </Link>
         <Link to="/contactUs" className="link link-hover">

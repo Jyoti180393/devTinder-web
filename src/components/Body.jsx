@@ -14,7 +14,8 @@ const Body = () => {
   const userData = useSelector((store) => store.user);
   const isNotLoginPage =
     location.pathname.includes("privacy-policy") ||
-    location.pathname.includes("contactUs");
+    location.pathname.includes("contactUs") ||
+    location.pathname.includes("aboutUs");
   const isLoginPage = location.pathname.startsWith("/login");
   const isLoggedIn = Boolean(localStorage.getItem("isLoggedIn"));
 
