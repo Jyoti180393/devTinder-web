@@ -793,3 +793,153 @@ export const privacyContent = {
     </div>
   ),
 };
+
+export const aboutContent = {
+  ourStory: (
+    <div className="space-y-5 leading-8">
+      <p>
+        Dev Tinder was created with a simple vision—to make it easier for
+        developers to connect with one another beyond resumes and job titles. We
+        believe meaningful professional relationships are built through shared
+        interests, technical expertise, and collaboration.
+      </p>
+
+      <p>
+        Whether you're a student, open-source contributor, freelancer, or an
+        experienced software engineer, Dev Tinder provides a dedicated space to
+        discover like-minded developers and grow your professional network.
+      </p>
+    </div>
+  ),
+  ourMission: (
+    <div className="space-y-5 leading-8">
+      <p>
+        Our mission is to build a developer-first networking platform where
+        learning, collaboration, and career growth happen naturally through
+        meaningful connections.
+      </p>
+
+      <p>
+        We aim to create an inclusive community that empowers developers to
+        share knowledge, discover opportunities, and help one another grow.
+      </p>
+    </div>
+  ),
+  whatWeOffer: (
+    <div className="space-y-5 leading-8">
+      <p>
+        Dev Tinder provides a modern networking experience tailored for
+        developers, making it easier to connect with professionals who share
+        similar skills, technologies, and interests.
+      </p>
+
+      <ul className="list-disc space-y-2 pl-6">
+        <li>Create a professional developer profile.</li>
+        <li>Showcase your skills, technologies, and experience.</li>
+        <li>Discover and connect with other developers.</li>
+        <li>Exchange knowledge through private conversations.</li>
+        <li>Build meaningful professional relationships.</li>
+      </ul>
+    </div>
+  ),
+  whyChooseDevTinder: (
+    <div className="space-y-5 leading-8">
+      <p>
+        Dev Tinder is built exclusively for developers, providing a focused
+        environment for professional networking without the distractions of
+        traditional social platforms.
+      </p>
+
+      <ul className="list-disc space-y-2 pl-6">
+        <li>Developer-first networking experience.</li>
+        <li>Connect based on skills, technologies, and interests.</li>
+        <li>Build meaningful professional relationships.</li>
+        <li>Collaborate, learn, and grow with the community.</li>
+      </ul>
+    </div>
+  ),
+  ourValues: (
+    <div className="space-y-5 leading-8">
+      <p>
+        Everything we build is guided by a simple set of values that put the
+        developer community first.
+      </p>
+
+      <div className="space-y-4">
+        <div>
+          <h3 className="font-semibold text-lg">Community</h3>
+          <p>
+            We believe great ideas grow through collaboration and knowledge
+            sharing.
+          </p>
+        </div>
+
+        <div>
+          <h3 className="font-semibold text-lg">Innovation</h3>
+          <p>
+            We continuously improve our platform to create better networking
+            experiences for developers.
+          </p>
+        </div>
+
+        <div>
+          <h3 className="font-semibold text-lg">Privacy</h3>
+          <p>
+            We are committed to protecting your personal information and giving
+            you control over your data.
+          </p>
+        </div>
+
+        <div>
+          <h3 className="font-semibold text-lg">Respect</h3>
+          <p>
+            We encourage a welcoming, inclusive, and professional community
+            where everyone feels valued.
+          </p>
+        </div>
+      </div>
+    </div>
+  ),
+  ourVision: (
+    <div className="space-y-5 leading-8">
+      <p>
+        We envision a world where developers can easily discover opportunities,
+        collaborate on innovative ideas, and build lasting professional
+        relationships regardless of their location or experience level.
+      </p>
+
+      <p>
+        As Dev Tinder continues to grow, we aim to introduce new features that
+        make networking, collaboration, and career development even more
+        accessible for developers worldwide.
+      </p>
+    </div>
+  ),
+  joinCommunity: (
+    <div className="space-y-5 leading-8 text-center">
+      <p>
+        Whether you're just starting your development journey or you're an
+        experienced software engineer, Dev Tinder is the place to connect,
+        learn, and grow with fellow developers.
+      </p>
+
+      <p className="text-lg font-semibold">
+        Join our growing community and start building meaningful developer
+        connections today.
+      </p>
+
+      {/* Uncomment if you want a Signup button */}
+
+      {/*
+    <div className="pt-4">
+      <Link
+        to="/signup"
+        className="inline-flex items-center rounded-lg bg-indigo-600 px-6 py-3 font-medium text-white transition hover:bg-indigo-700"
+      >
+        Get Started
+      </Link>
+    </div>
+    */}
+    </div>
+  ),
+};
