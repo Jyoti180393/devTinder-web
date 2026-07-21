@@ -51,3 +51,11 @@
 - Add skills in signup and profile page to save in DB
 - make common component for request and connection
 - add pagination to get users data in the profile page
+
+## RazorPay Payment Gateway Integration
+
+- Signup for RazorPay and get the API Key and Secret
+- Created UI for premium subscription and added a button to pay for premium
+- Added a new route for payment page and added a new component for payment
+- Handled payment Api call
+- Once the order is created, call the RazorPay dialog box for checkout and handle the payment from BE
