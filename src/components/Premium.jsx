@@ -6,7 +6,7 @@ import { updateUser } from "../store/userSlice";
 const Premium = () => {
   const dispatch = useDispatch();
   const handlePaymentSuccess = async () => {
-    const res = await axios.get(BASE_URL + "/payment/success", {
+    const res = await axios.get(BASE_URL + "/payment/verify", {
       withCredentials: true,
     });
 
