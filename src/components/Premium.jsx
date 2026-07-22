@@ -2,9 +2,12 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constant";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Premium = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handlePaymentSuccess = async () => {
     const res = await axios.get(BASE_URL + "/payment/verify", {
       withCredentials: true,
@@ -13,6 +16,7 @@ const Premium = () => {
     console.log(res.data);
     if (res.data.isPremium) {
       dispatch(updateUser({ isPremium: true }));
+      navigate("/");
     }
   };
   const handlePayment = async (membershipType) => {
