@@ -59,3 +59,4 @@
 - Added a new route for payment page and added a new component for payment
 - Handled payment Api call
 - Once the order is created, call the RazorPay dialog box for checkout and handle the payment from BE
+- Call the /payment/verify API to update the user as premium and update the store with new user data

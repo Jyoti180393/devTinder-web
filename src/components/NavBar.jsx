@@ -68,9 +68,11 @@ const NavBar = () => {
                 <li>
                   <Link to="/requests">Requests</Link>
                 </li>
-                <li>
-                  <Link to="/premium">Premium</Link>
-                </li>
+                {!user.isPremium && (
+                  <li>
+                    <Link to="/premium">Premium</Link>
+                  </li>
+                )}
                 <li>
                   <button onClick={handleLogout}>Logout</button>
                 </li>

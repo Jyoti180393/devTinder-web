@@ -1,7 +1,20 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/constant";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../store/userSlice";
 
 const Premium = () => {
+  const dispatch = useDispatch();
+  const handlePaymentSuccess = async () => {
+    const res = await axios.get(BASE_URL + "/payment/success", {
+      withCredentials: true,
+    });
+
+    console.log(res.data);
+    if (res.data.isPremium) {
+      dispatch(updateUser({ isPremium: true }));
+    }
+  };
   const handlePayment = async (membershipType) => {
     try {
       const orderRes = await axios.post(
@@ -9,7 +22,6 @@ const Premium = () => {
         { membershipType },
         { withCredentials: true },
       );
-      console.log(orderRes.data.data);
       const { key, amount, currency, notes, orderId } = orderRes.data.data;
 
       const razorPayOption = {
@@ -28,6 +40,7 @@ const Premium = () => {
         theme: {
           color: "#F37254",
         },
+        handler: handlePaymentSuccess, // Callback function to handle payment success
       };
 
       const rzp = new window.Razorpay(razorPayOption);
