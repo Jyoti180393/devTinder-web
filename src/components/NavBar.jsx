@@ -39,6 +39,28 @@ const NavBar = () => {
         {user && (
           <div className="flex gap-2 items-center">
             <p>Welcome {user.firstName}</p>
+            {user.isPremium && (
+              <>
+                {/* add this to a reusable component and use it in the navbar and usercard */}
+                <div class="relative inline-block p-2 ml-4">
+                  <span class="absolute bottom-0 right-0 bg-blue-500 text-white rounded-full p-0.5 flex items-center justify-center ring-2 ring-white">
+                    <svg
+                      class="w-3.5 h-3.5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </>
+            )}
             <div className="dropdown dropdown-end mx-4">
               <div
                 tabIndex={0}
