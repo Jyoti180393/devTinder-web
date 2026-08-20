@@ -51,6 +51,7 @@
 - Add skills in signup and profile page to save in DB
 - make common component for request and connection
 - add pagination to get users data in the profile page
+- Add premium sign like blue tick for premium users
 
 ## RazorPay Payment Gateway Integration
 
@@ -60,3 +61,8 @@
 - Handled payment Api call
 - Once the order is created, call the RazorPay dialog box for checkout and handle the payment from BE
 - Call the /payment/verify API to update the user as premium and update the store with new user data
+
+# Chat Feature using socket.io
+
+- Create a chatbox component for chat ui
+- Create a route for chat and add the link in connection component

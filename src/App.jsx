@@ -12,6 +12,7 @@ import PrivacyPolicy from "./components/Footer-pages/PrivacyPolicy";
 import ContactUs from "./components/Footer-pages/ContactUs";
 import AboutUs from "./components/Footer-pages/AboutUs";
 import Premium from "./components/Premium";
+import Chatbox from "./components/Chatbox";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route path="/contactUs" element={<ContactUs />} />
               <Route path="/aboutUs" element={<AboutUs />} />
               <Route path="/premium" element={<Premium />} />
+              <Route path="/chat/:toUserId" element={<Chatbox />} />
             </Route>
           </Routes>
         </BrowserRouter>
