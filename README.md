@@ -66,3 +66,8 @@
 
 - Create a chatbox component for chat ui
 - Create a route for chat and add the link in connection component
+- Install socket.io-client and connect to the socket server
+- Handle the socket connection and emit the message to the server for "joinChat" event
+- Handle the socket message from the server and update the chatbox with new messages for "sendMessage" event
+- Handle the socket message from the server and update the chatbox with new messages for "receiveMessage" event
+- Append the new mesaages to message array
