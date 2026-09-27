@@ -6,7 +6,7 @@ import { createSocketConnection } from "../utils/socket";
 const Chatbox = () => {
   const connections = useSelector((store) => store.connections);
 
-  const { toUserId } = useParams();
+  const { targetUserId } = useParams();
   const userData = useSelector((store) => store.user);
   const user = useSelector((store) => store.user);
   const userId = user?._id;
@@ -35,12 +35,12 @@ const Chatbox = () => {
     }
     const socket = createSocketConnection();
 
-    socket.emit("joinChat", { firstName, userId, toUserId });
+    socket.emit("joinChat", { firstName, userId, targetUserId });
     console.log("chat joined");
 
     socket.on(
       "receiveMessage",
-      ({ firstName, userId, toUserId, text, sendAt }) => {
+      ({ firstName, userId, targetUserId, text, sendAt }) => {
         console.log(
           firstName,
           "'s message received: ",
@@ -49,7 +49,7 @@ const Chatbox = () => {
         );
         setMessage((messages) => [
           ...messages,
-          { firstName, userId, toUserId, text, sendAt },
+          { firstName, userId, targetUserId, text, sendAt },
         ]);
       },
     );
@@ -57,10 +57,10 @@ const Chatbox = () => {
     return () => {
       socket.disconnect();
     };
-  }, [firstName, userId, toUserId]);
+  }, [firstName, userId, targetUserId]);
 
   const toUseData = connections?.find(
-    (connection) => connection._id === toUserId,
+    (connection) => connection._id === targetUserId,
   );
 
   const sendMessages = () => {
@@ -68,7 +68,7 @@ const Chatbox = () => {
     socket.emit("sendMessage", {
       firstName,
       userId,
-      toUserId,
+      targetUserId,
       text: newMessage,
       sendAt: new Date().toISOString(),
     });
@@ -116,34 +116,6 @@ const Chatbox = () => {
                   {isMyMessage ? "Sent" : "Received"}
                 </div>
               </div>
-              // <div key={index}>
-              //   <div className="chat chat-start">
-              //     <div className="chat-image avatar">
-              //       <div className="w-10 rounded-full">
-              //         <img alt="To User Avatar" src={toUseData?.photoUrl} />
-              //       </div>
-              //     </div>
-              //     <div className="chat-header">
-              //       {toUseData?.firstName}
-              //       <time className="text-xs opacity-50">12:45</time>
-              //     </div>
-              //     <div className="chat-bubble">You were the Chosen One!</div>
-              //     <div className="chat-footer opacity-50">Delivered</div>
-              //   </div>
-              //   <div className="chat chat-end">
-              //     <div className="chat-image avatar">
-              //       <div className="w-10 rounded-full">
-              //         <img alt="User Avatar" src={userData.photoUrl} />
-              //       </div>
-              //     </div>
-              //     <div className="chat-header">
-              //       {userData.firstName}
-              //       <time className="text-xs opacity-50">12:46</time>
-              //     </div>
-              //     <div className="chat-bubble">{msg.text}</div>
-              //     <div className="chat-footer opacity-50">Seen at 12:46</div>
-              //   </div>
-              // </div>
             );
           })}
       </div>
