@@ -33,7 +33,7 @@ function App() {
               <Route path="/contactUs" element={<ContactUs />} />
               <Route path="/aboutUs" element={<AboutUs />} />
               <Route path="/premium" element={<Premium />} />
-              <Route path="/chat/:toUserId" element={<Chatbox />} />
+              <Route path="/chat/:targetUserId" element={<Chatbox />} />
             </Route>
           </Routes>
         </BrowserRouter>
