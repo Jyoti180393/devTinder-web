@@ -71,3 +71,4 @@
 - Handle the socket message from the server and update the chatbox with new messages for "sendMessage" event
 - Handle the socket message from the server and update the chatbox with new messages for "receiveMessage" event
 - Append the new mesaages to message array
+- Get the chat history from the server and update the chatbox with the messages

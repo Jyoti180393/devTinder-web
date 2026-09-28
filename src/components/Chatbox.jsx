@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
+import axios from "axios";
+import { BASE_URL } from "../utils/constant";
 
 const Chatbox = () => {
   const connections = useSelector((store) => store.connections);
 
   const { targetUserId } = useParams();
-  const userData = useSelector((store) => store.user);
   const user = useSelector((store) => store.user);
   const userId = user?._id;
-  const firstName = user?.firstName;
-  const [messages, setMessage] = useState([]);
+  // const { firstName, photoUrl } = user;
+  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
   const formatTime = (timeString) => {
@@ -29,35 +30,57 @@ const Chatbox = () => {
     return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${amPm}`;
   };
 
+  const fetchChatHistory = async () => {
+    try {
+      const res = await axios.get(BASE_URL + "/chat/" + targetUserId, {
+        withCredentials: true,
+      });
+
+      const chatMessages = res?.data?.messages?.map((message) => {
+        const { senderId, text, sendAt } = message;
+        return {
+          firstName: senderId?.firstName,
+          photoUrl: senderId?.photoUrl,
+          text,
+          sendAt,
+        };
+      });
+
+      setMessages(chatMessages);
+    } catch (err) {
+      console.error("Error fetching chat history: ", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchChatHistory();
+  }, []);
+
   useEffect(() => {
     if (!userId) {
       return;
     }
     const socket = createSocketConnection();
 
-    socket.emit("joinChat", { firstName, userId, targetUserId });
+    socket.emit("joinChat", {
+      firstName: user?.firstName,
+      userId,
+      targetUserId,
+    });
     console.log("chat joined");
 
-    socket.on(
-      "receiveMessage",
-      ({ firstName, userId, targetUserId, text, sendAt }) => {
-        console.log(
-          firstName,
-          "'s message received: ",
-          text,
-          formatTime(sendAt),
-        );
-        setMessage((messages) => [
-          ...messages,
-          { firstName, userId, targetUserId, text, sendAt },
-        ]);
-      },
-    );
+    socket.on("receiveMessage", ({ firstName, photoUrl, text, sendAt }) => {
+      setMessages((messages) => [
+        ...messages,
+        { firstName, photoUrl, text, sendAt },
+      ]);
+      console.log("message received: ", messages);
+    });
 
     return () => {
       socket.disconnect();
     };
-  }, [firstName, userId, targetUserId]);
+  }, [userId, targetUserId]);
 
   const toUseData = connections?.find(
     (connection) => connection._id === targetUserId,
@@ -66,7 +89,9 @@ const Chatbox = () => {
   const sendMessages = () => {
     const socket = createSocketConnection();
     socket.emit("sendMessage", {
-      firstName,
+      firstName: user.firstName,
+      photoUrl: user.photoUrl,
+
       userId,
       targetUserId,
       text: newMessage,
@@ -87,7 +112,7 @@ const Chatbox = () => {
         )}
         {messages.length > 0 &&
           messages.map((msg, index) => {
-            const isMyMessage = msg.userId === userId;
+            const isMyMessage = msg.firstName === user?.firstName;
             return (
               <div
                 key={index}
@@ -97,15 +122,13 @@ const Chatbox = () => {
                   <div className="w-10 rounded-full">
                     <img
                       alt={isMyMessage ? "User Avatar" : "Other User Avatar"}
-                      src={
-                        isMyMessage ? userData.photoUrl : toUseData?.photoUrl
-                      }
+                      src={isMyMessage ? user?.photoUrl : user?.photoUrl}
                     />
                   </div>
                 </div>
 
                 <div className="chat-header">
-                  {isMyMessage ? userData.firstName : toUseData?.firstName}
+                  {isMyMessage ? user?.firstName : toUseData?.firstName}
                   <time className="text-xs opacity-50">
                     {formatTime(msg.sendAt)}
                   </time>
