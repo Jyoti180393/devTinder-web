@@ -37,12 +37,12 @@ const Chatbox = () => {
       });
 
       const chatMessages = res?.data?.messages?.map((message) => {
-        const { senderId, text, sendAt } = message;
+        const { senderId, text, createdAt } = message;
         return {
           firstName: senderId?.firstName,
           photoUrl: senderId?.photoUrl,
           text,
-          sendAt,
+          sendAt: createdAt,
         };
       });
 
@@ -91,7 +91,6 @@ const Chatbox = () => {
     socket.emit("sendMessage", {
       firstName: user.firstName,
       photoUrl: user.photoUrl,
-
       userId,
       targetUserId,
       text: newMessage,
@@ -122,7 +121,7 @@ const Chatbox = () => {
                   <div className="w-10 rounded-full">
                     <img
                       alt={isMyMessage ? "User Avatar" : "Other User Avatar"}
-                      src={isMyMessage ? user?.photoUrl : user?.photoUrl}
+                      src={msg?.photoUrl}
                     />
                   </div>
                 </div>
