@@ -30,31 +30,66 @@ const Chatbox = () => {
     return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${amPm}`;
   };
 
-  const fetchChatHistory = async () => {
-    try {
-      const res = await axios.get(BASE_URL + "/chat/" + targetUserId, {
-        withCredentials: true,
-      });
+  // const fetchChatHistory = async () => {
+  //   try {
+  //     const res = await axios.get(BASE_URL + "/chat/" + targetUserId, {
+  //       withCredentials: true,
+  //     });
 
-      const chatMessages = res?.data?.messages?.map((message) => {
-        const { senderId, text, createdAt } = message;
-        return {
-          firstName: senderId?.firstName,
-          photoUrl: senderId?.photoUrl,
-          text,
-          sendAt: createdAt,
-        };
-      });
+  //     const chatMessages = res?.data?.messages?.map((message) => {
+  //       const { senderId, text, createdAt } = message;
+  //       return {
+  //         firstName: senderId?.firstName,
+  //         photoUrl: senderId?.photoUrl,
+  //         text,
+  //         sendAt: createdAt,
+  //       };
+  //     });
 
-      setMessages(chatMessages);
-    } catch (err) {
-      console.error("Error fetching chat history: ", err);
-    }
-  };
+  //     setMessages(chatMessages);
+  //   } catch (err) {
+  //     console.error("Error fetching chat history: ", err);
+  //   }
+  // };
 
   useEffect(() => {
-    fetchChatHistory();
-  }, []);
+    let ignore = false;
+    // this flag is used to prevent state updates if the component unmounts before
+    // the async operation completes
+
+    const loadChatHistory = async () => {
+      try {
+        const res = await axios.get(`${BASE_URL}/chat/${targetUserId}`, {
+          withCredentials: true,
+        });
+
+        const chatMessages = (res.data?.messages ?? []).map((message) => ({
+          senderId: message.senderId?._id,
+          firstName: message.senderId?.firstName,
+          photoUrl: message.senderId?.photoUrl,
+          text: message.text,
+          sendAt: message.createdAt,
+        }));
+
+        if (!ignore) {
+          setMessages(chatMessages);
+        }
+      } catch (err) {
+        if (!ignore) {
+          console.error("Error fetching chat history:", err);
+        }
+      }
+    };
+
+    // check if targetUserId is defined before calling loadChatHistory
+    if (targetUserId) {
+      loadChatHistory();
+    }
+
+    return () => {
+      ignore = true;
+    };
+  }, [targetUserId]);
 
   useEffect(() => {
     if (!userId) {
@@ -63,9 +98,9 @@ const Chatbox = () => {
     const socket = createSocketConnection();
 
     socket.emit("joinChat", {
-      firstName: user?.firstName,
       userId,
       targetUserId,
+      firstName: user?.firstName,
     });
     console.log("chat joined");
 
