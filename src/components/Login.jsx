@@ -36,7 +36,7 @@ const Login = () => {
       // axios response objects already have parsed JSON
     } catch (err) {
       setError(err?.response?.data || "Something went wrong");
-      console.error("ERROR: ", err.response.data);
+      console.error("ERROR: ", err?.response?.data || err);
       // TODO: need to redirect to error page
     }
   };

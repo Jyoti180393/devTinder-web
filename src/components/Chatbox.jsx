@@ -14,6 +14,7 @@ const Chatbox = () => {
   // const { firstName, photoUrl } = user;
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [error, setError] = useState("");
 
   const formatTime = (timeString) => {
     if (!timeString) return "";
@@ -54,11 +55,13 @@ const Chatbox = () => {
 
   useEffect(() => {
     let ignore = false;
+
     // this flag is used to prevent state updates if the component unmounts before
     // the async operation completes
 
     const loadChatHistory = async () => {
       try {
+        setError("");
         const res = await axios.get(`${BASE_URL}/chat/${targetUserId}`, {
           withCredentials: true,
         });
@@ -76,7 +79,11 @@ const Chatbox = () => {
         }
       } catch (err) {
         if (!ignore) {
-          console.error("Error fetching chat history:", err);
+          console.error("Error fetching chat history: ", err?.response?.data);
+          setError(
+            err?.response?.data ||
+              "Something went wrong while fetching chat history",
+          );
         }
       }
     };
@@ -102,20 +109,19 @@ const Chatbox = () => {
       targetUserId,
       firstName: user?.firstName,
     });
-    console.log("chat joined");
 
     socket.on("receiveMessage", ({ firstName, photoUrl, text, sendAt }) => {
-      setMessages((messages) => [
-        ...messages,
+      setMessages((prevMessages) => [
+        ...prevMessages,
         { firstName, photoUrl, text, sendAt },
       ]);
-      console.log("message received: ", messages);
+      console.log("message received: ", text);
     });
 
     return () => {
       socket.disconnect();
     };
-  }, [userId, targetUserId]);
+  }, [userId, targetUserId, user?.firstName]);
 
   const toUseData = connections?.find(
     (connection) => connection._id === targetUserId,
@@ -138,13 +144,21 @@ const Chatbox = () => {
     <div className="flex flex-col  my-10 bg-base-100 m-5 h-[calc(75vh)] border border-gray-300 rounded-lg">
       <h1 className="text-center text-3xl p-2">Chat</h1>
       <div className="flex-1 overflow-auto p-5">
-        {messages.length === 0 && (
+        {error && (
+          <div className="flex h-full min-h-52 items-center justify-center">
+            <p className="text-red-500 leading-6 text-3xl text-center">
+              {error}
+            </p>
+          </div>
+        )}
+        {messages.length === 0 && !error && (
           <div className="flex flex-col justify-center my-30">
             <h1 className="text-center text-3xl my-2">No messages yet!</h1>
             <p className="text-center">Start the conversation</p>
           </div>
         )}
         {messages.length > 0 &&
+          !error &&
           messages.map((msg, index) => {
             const isMyMessage = msg.firstName === user?.firstName;
             return (
