@@ -9,17 +9,18 @@
 - Install node then node and same version as project :
   - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
   - nvm install <current_version>
-- Git clone project
+- Git clone projects
 - Frontend steps
-- npm install dependencies
-- npm run build
-- sudo apt update (update ubuntu)
-- sudo apt install nginx
-- sudo systemctl start nginx
-- sudo systemctl enable nginx
-- Copy code from devtinder/dist file to /var/www/html/ ---> sudo scp -r dist/\* /var/www/html/
-- Enable port :80 from AWS instance -> security -> security group
-- Update the base url to "/api"
+  - Install dependencies: npm install
+  - Run build: <npm run build>
+  - To update Ubuntu: <sudo apt update> (update ubuntu)
+  - Install nginx: <sudo apt install nginx>
+    (a high-performance open-source web server, reverse proxy, load balancer, and content cache)
+  - Start nginx in the system : <sudo systemctl start nginx>
+  - Enable nginx in the system : <sudo systemctl enable nginx>
+  - Copy code from devtinder/dist file to /var/www/html/ ---> <sudo scp -r dist/\* /var/www/html/>
+  - Enable port :80 from AWS instance -> security -> security group
+    (since nginx is running on port 80 and awa blocks all the ports by default)
 
 # Adding a Custom Domain name
 
