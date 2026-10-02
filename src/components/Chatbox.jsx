@@ -115,7 +115,6 @@ const Chatbox = () => {
         ...prevMessages,
         { firstName, photoUrl, text, sendAt },
       ]);
-      console.log("message received: ", text);
     });
 
     return () => {

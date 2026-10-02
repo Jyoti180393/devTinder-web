@@ -2,9 +2,13 @@
 
 - Signup to AWS
 - Launch instance and make secret key to access the instance or server
-- unlock the secret key file chmod 400 <secret>.pem
-- start the instance ssh -i <secret>.pem ubuntu----
-- Install npm and same version as project
+- Download the secret key
+- open cmd or git bash
+- unlock the secret key file or change the permission of the secret file : chmod 400 <secret>.pem
+- start the instance : ssh -i <secret>.pem ubuntu---- (copy the cmd from AWS instance)
+- Install node then node and same version as project :
+  - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+  - nvm install <current_version>
 - Git clone project
 - Frontend steps
 - npm install dependencies
