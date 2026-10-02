@@ -25,9 +25,10 @@
 # Adding a Custom Domain name
 
 - purchase domain name from goDaddy
-- signup on the cloudflare & add new domain name
-- change the nameserver on goDaddy and point to cloudflare
-- wait for cloudflare to update the nameserver
-- In DNS -> records Edited the A records with the ip address of
-  our AWS instance public IP address in content
+- Signup on the cloudflare & add new domain name
+- Get the nameserver from cloudflare and change the nameserver on goDaddy
+- Change the nameserver on goDaddy -> your domain name -> DNS -> Nameserver
+- Wait for cloudflare to update the nameserver
+- In cloudflare ->yourdomainname -> DNS -> Records : Edited the A records with the ip address of
+  our AWS EC2 public IP address in content
 - Enable SSL flexible for our site
